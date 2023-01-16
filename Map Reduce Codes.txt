@@ -1,0 +1,27 @@
+-----------------Run the docker container---------------------
+
+docker run -p 8088:8088 -p 50070:50070 --name Ravidu_CWK -v /home/ravidu/Desktop/BDPCWK:/resources -d suhothayan/hadoop-hive-pig:2.7.1 
+
+
+--------------- Execute the docker continer------------------
+
+docker exec -it Ravidu_CWK bash 
+
+
+cd resource/
+
+hdfs dfs -put Ipl Ipl
+
+#####################################################Question 01 #################################################
+
+yarn jar Ravidu_20211499/target/Ravidu_20211499-1.0-SNAPSHOT.jar BDP_CWK.DeliveriesData Ipl/Ipl.csv output/DeliveryData
+
+hdfs dfs -cat output/DeliveryData/part-r-00000
+
+
+
+###################################################Question 02 ###################################################################
+
+yarn jar Ravidu_20211499/target/Ravidu_20211499-1.0-SNAPSHOT.jar BDP_CWK.WicketCount Ipl/Ipl.csv output/WicketCount
+
+hdfs dfs -cat output/WicketCount/part-r-00000
